@@ -506,6 +506,30 @@
         }
       ],
       "id": 8
+    },
+    {
+      "name": "Anonimo",
+      "email": "teste@teste.com",
+      "emailConfirmation": "teste@teste.com",
+      "address": "Rua teste",
+      "number": "100",
+      "optionalAddress": "",
+      "paymentOption": "DEB",
+      "orderItems": [
+        {
+          "quantity": 3,
+          "menuId": "cup-cake"
+        },
+        {
+          "quantity": 2,
+          "menuId": "donut"
+        },
+        {
+          "quantity": 3,
+          "menuId": "bread"
+        }
+      ],
+      "id": 9
     }
   ]
 }

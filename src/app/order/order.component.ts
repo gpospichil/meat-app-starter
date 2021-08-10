@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from
 import { Router } from '@angular/router';
 import { CartItem } from 'app/restaurant-detail/shopping-cart/cart-item.model';
 import { RadioOption } from 'app/shared/radio/radio-option.model';
+import { tap } from 'rxjs/operators';
 import { Order, OrderItem } from './order.model';
 import { OrderService } from './order.service';
 
@@ -36,7 +37,7 @@ export class OrderComponent implements OnInit {
     this.orderForm = new FormGroup({
       name: new FormControl('', {
         validators: [
-          Validators.required, 
+          Validators.required,
           Validators.minLength(5)
         ]
       }),
@@ -46,7 +47,7 @@ export class OrderComponent implements OnInit {
       number: this.formBuilder.control('', [Validators.required, Validators.pattern(this.numberPattern)]),
       optionalAddress: this.formBuilder.control(''),
       paymentOption: this.formBuilder.control('', [Validators.required])
-    }, { validators: [OrderComponent.equalsTo], updateOn:'blur' })
+    }, { validators: [OrderComponent.equalsTo], updateOn: 'blur' })
   }
 
   static equalsTo(group: AbstractControl): { [key: string]: boolean } {
@@ -90,9 +91,9 @@ export class OrderComponent implements OnInit {
       .map((item: CartItem) => new OrderItem(item.quantity, item.menuItem.id))
 
     this.orderService.checkOrder(order)
-      .do((orderId: string) => {
+      .pipe(tap((orderId: string) => {
         this.orderId = orderId
-      })
+      }))
       .subscribe((orderId: string) => {
         this.router.navigate(['/order-summary'])
         this.orderService.clear()

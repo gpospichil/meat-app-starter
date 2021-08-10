@@ -5,6 +5,7 @@ import { ShoppingCartService } from "app/restaurant-detail/shopping-cart/shoppin
 import { Observable } from "rxjs/Observable";
 import { Order } from "./order.model";
 import { MEAT_API } from "app/app.api";
+import 'rxjs/add/operator/map'
 
 @Injectable()
 export class OrderService {
